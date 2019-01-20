@@ -15,26 +15,34 @@
     </header>
     <form id="generator" class="loading">
       <ul>	  	
-		从random.org获得4个随机数。<br/>
-		url: https://www.random.org/integers/?num=4&amp;col=5&amp;base=10&amp;format=plain&amp;rnd=new&amp;min=1&amp;max=8964<br />
-        <iframe id="randomorg" style="width:300px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8964">
+		下面这个iframe是从random.org获得4个随机数。稍等几秒钟。<br/>https://www.random.org/integers/?num=4&amp;col=5&amp;base=10&amp;format=plain&amp;rnd=new&amp;min=1&amp;max=8192<br />
+        <iframe id="randomorg" style="width:300px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">
         </iframe><br/>
 		把上面获得的随机数列复制粘贴到下面的文本框中。再点击“下一组”按钮。<br/>
 		<input type="text" id="randomarray" style="width:300px">
       </ul>
-      <ul id="phrases">
+      <ul id="phrasespinyin">
         <li data-hans="正确">correct</li>
         <li data-hans="马">horse</li>
         <li data-hans="电池">battery</li>
         <li data-hans="订书钉">staple</li>
       </ul>
+	  <ul id="phraseswubi">
+        <li data-hans="正确">correct</li>
+        <li data-hans="马">horse</li>
+        <li data-hans="电池">battery</li>
+        <li data-hans="订书钉">staple</li>
+      </ul>
+	  <ul>
+		<span style="color:red;">五笔和拼音编码皆为网络资源，恐有疏忽，请自行复查确认。</span>
+	  </ul>
       <button id="generate" disabled>下一组</button>
       <template id="phrase"><li></li></template>
     </form>
     <article>
       <p>又名「正确马电池订书钉密码生成器」，出自 <a href="https://xkcd.com/936/">xkcd 的一副漫画</a>。</p>
       <p>这是汉语拼音版本，你可以直接使用上面显示的拼音作为你的密码。<p>
-      <p>这四个词是从 <span class="num-phrases">8900</span>
+      <p>这四个词是从 <span class="num-phrases">8192</span>
         个汉语常用词组中随机挑选出来的。其密码强度<a class="note" href="#note-1">[1]</a>大致相当于 8
         位随机生成的，包含大小写字母、数字和特殊符号<a class="note" href="#note-2">[2]</a>的密码（比如
         <code>K#7%ol4e</code>）；强于 10 位的随机小写字母、数字混合密码（比如
