@@ -34,11 +34,19 @@ function generatePassphrase() {
   const list = $('#phrases');
   list.innerHTML = '';
   let randoms = new Uint16Array(NUM_PHRASE);
-  window.crypto.getRandomValues(randoms);
+  if (document.getElementById("randomarray").value == "")
+  {
+    window.crypto.getRandomValues(randoms);
+  }
+  else
+  {
+    var randomarray = document.getElementById("randomarray").value;
+    randoms = randomarray.split('\t', 4);
+  }
   Array.from(randoms)
-    .map(n => dict[n % dict.length])
-    .map(phraseToHTML)
-    .forEach(html => list.appendChild(html));
+  .map(n => dict[n % dict.length])
+  .map(phraseToHTML)
+  .forEach(html => list.appendChild(html));
 }
 
 function phraseToHTML(phrase) {
