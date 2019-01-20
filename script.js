@@ -10,9 +10,9 @@ async function loadDict(url) {
   return text.split('\n')
     .filter(s => s.includes('\t'))
     .map(s => s.split('\t'))
-    .map(([hans, code]) => ({
-      code: code.trim(),
+    .map(([code, hans]) => ({
       hans: hans.trim(),
+      code: code.trim(),
     }));
 }
 
