@@ -14,13 +14,21 @@
       </h1>
     </header>
     <form id="generator" class="loading">
+      <ul>	  	
+		从random.org获得4个随机数。<br/>
+		url: https://www.random.org/integers/?num=4&amp;col=5&amp;base=10&amp;format=plain&amp;rnd=new&amp;min=1&amp;max=8964<br />
+        <iframe id="randomorg" style="width:300px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8964">
+        </iframe><br/>
+		把上面获得的随机数列复制粘贴到下面的文本框中。再点击“下一组”按钮。<br/>
+		<input type="text" id="randomarray" style="width:300px">
+      </ul>
       <ul id="phrases">
         <li data-hans="正确">correct</li>
         <li data-hans="马">horse</li>
         <li data-hans="电池">battery</li>
         <li data-hans="订书钉">staple</li>
       </ul>
-      <button id="generate" disabled>换一组</button>
+      <button id="generate" disabled>下一组</button>
       <template id="phrase"><li></li></template>
     </form>
     <article>
