@@ -16,12 +16,18 @@
     <form id="generator" class="loading">
       <ul>	  	
 		下面这个iframe是从random.org获得4个随机数。稍等几秒钟。<br/><a href="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">https://www.random.org/integers/?num=4&amp;col=5&amp;base=10&amp;format=plain&amp;rnd=new&amp;min=1&amp;max=8192</a><br />
-        <iframe id="randomorg" style="width:300px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">
+        <iframe id="randomorg" style="width:200px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">
         </iframe><br/>
 		把上面获得的随机数列复制粘贴到下面的文本框中，再点击“下一组”按钮，以文本框中的数列选择词语。<br/>
-		<input type="text" id="randomarray" style="width:300px"><br />
+		<input type="text" id="randomarray" style="width:200px"><br />
 		文本框为空时，调用<a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues">window.crypto.getRandomValues</a>随机选择词语。
       </ul>
+	<ul>
+		<span style="color:red;">五笔和拼音编码皆为网络资源，恐有疏忽，请一定复查确认。<a href="https://github.com/crazypeace/xkcd-password-generator-cn-py-wb-random.org/issues/new">有问题提issue。</a></span>
+	</ul>
+	<ul>
+    <button id="generate" disabled>下一组</button>
+	</ul>
       <ul id="phrasespinyin" class="phrases">
         <li data-hans="正确">correct</li>
         <li data-hans="马">horse</li>
@@ -34,10 +40,6 @@
         <li data-hans="电池">battery</li>
         <li data-hans="订书钉">staple</li>
       </ul>
-	  <ul>
-		<span style="color:red;">五笔和拼音编码皆为网络资源，恐有疏忽，请一定复查确认。<a href="https://github.com/crazypeace/xkcd-password-generator-cn-py-wb-random.org/issues/new">有问题提issue。</a></span>
-	  </ul>
-      <button id="generate" disabled>下一组</button>
       <template id="phrase"><li></li></template>
     </form>
     <article>
