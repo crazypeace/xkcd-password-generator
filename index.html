@@ -13,19 +13,16 @@
         <span lang="en">xkcd Password Generator for Chinese</span>
       </h1>
     </header>
-    <form id="generator" class="loading">
-	  	
-		下面这个iframe是从random.org获得4个随机数。稍等几秒钟。<br/><br />
-        <iframe id="randomorg" style="width:200px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">
+		下面这个iframe是从random.org获得4个随机数。稍等几秒钟。<br/>
+        <iframe id="randomorg" style="width:300px; height:50px;" src="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">
         </iframe><br/>
 		把上面获得的随机数列复制粘贴到下面的文本框中，再点击“下一组”按钮，以文本框中的数列选择词语。<br/>
-	      手机复制不便，<a href="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">请点链接在新页面中自行复制。</a><br />
-		<input type="text" id="randomarray" style="width:200px"><br />
+	      手机复制不便，<a href="https://www.random.org/integers/?num=4&col=5&base=10&format=plain&rnd=new&min=1&max=8192">请点链接在新页面中复制数字。</a><br />
+		<input type="text" id="randomarray" style="width:300px"><br />
 		文本框为空时，调用<a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues">window.crypto.getRandomValues</a>随机选择词语。
-
-	<ul>
 		<span style="color:red;">五笔和拼音编码皆为网络资源，恐有疏忽，请一定复查确认。<a href="https://github.com/crazypeace/xkcd-password-generator-cn-py-wb-random.org/issues/new">有问题提issue。</a></span>
-	</ul>
+
+    <form id="generator" class="loading">
 	<ul>
     <button id="generate" disabled>下一组</button>
 	</ul>
