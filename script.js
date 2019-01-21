@@ -45,7 +45,7 @@ function generatePassphrase() {
   else
   {
     var randomarray = document.getElementById("randomarray").value;
-    randoms = randomarray.split('/\s+/', 4);
+    randoms = randomarray.split(/\s+/, 4);
   }
   
   Array.from(randoms)
