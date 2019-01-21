@@ -10,10 +10,8 @@ header { border-bottom: #00796B solid 1px; padding: 1.2em; background: #00897B; 
 #generator { text-align: center; padding: 1em; } 
 #generator.loading li { color: lightgray; }
 .phrases { list-style: none; }
-.phrases li { display: inline-block; margin-right: 0.5em; font-size: 1.8em;
-  font-family: monospace; }
-.phrases li::after { content: "\A" attr(data-hans); white-space: pre;
-  font-family: serif; font-size: 0.8em; }
+.phrases li { display: inline-block; margin-right: 0.5em; font-size: 1.8em; list-style-type:none;  font-family: monospace; }
+.phrases li::after { content: "\A" attr(data-hans); white-space: pre; font-family: serif; font-size: 0.8em; }
 
 article { background: #E0F2F1; padding: 1em; width: 80%; margin: 0 auto;}
 article h2 { font-size: 1.5em; color: #004D40; margin-top: 1.5em; }
