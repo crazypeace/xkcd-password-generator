@@ -1,8 +1,9 @@
 "use strict";
 const $ = selector => document.querySelector(selector);
 const NUM_PHRASE = 4;
-let dictpinyin = null;
-let dictwubi = null;
+let dictPinyin = null;
+let dictWubi = null;
+let dictEnglish = null;
 
 async function loadDict(url) {
   const resp = await fetch(url);
@@ -18,24 +19,29 @@ async function loadDict(url) {
 
 (async function () {
   try {
-    dictpinyin = await loadDict("pinyin8k.wordlist");
-	dictwubi = await loadDict("wubi8k.wordlist");
+    dictPinyin = await loadDict("pinyin8k.wordlist");
+	dictWubi = await loadDict("wubi8k.wordlist");
+	dictEnglish = await loadDict("english4k.wordlist");
   } catch (e) {
     alert("Fail to load dict: " + e);
     return;
   }
-  console.log(`dictpinyin${dictpinyin.length} phrases loaded`);
-  console.log(`dictwubi${dictwubi.length} phrases loaded`);
+  console.log(`dictPinyin${dictPinyin.length} phrases loaded`);
+  console.log(`dictWubi${dictWubi.length} phrases loaded`);
+  console.log(`dictEnglish${dictEnglish.length} phrases loaded`);
   generatePassphrase();
   $('#generator').classList.remove('loading');
   $('#generate').disabled = false;
 })();
 
 function generatePassphrase() {
-  const listpinyin = $('#phrasespinyin');
-  listpinyin.innerHTML = '';
- const listwubi = $('#phraseswubi');
- listwubi.innerHTML = '';
+  const listPinyin = $('#phrasespinyin');
+  listPinyin.innerHTML = '';
+  const listWubi = $('#phraseswubi');
+  listWubi.innerHTML = '';
+  const listEnglish = $('#phrasesen');
+  listEnglish.innerHTML = '';
+  
   let randoms = new Uint16Array(NUM_PHRASE);
   
   if (document.getElementById("randomarray").value == "")
@@ -49,13 +55,17 @@ function generatePassphrase() {
   }
   
   Array.from(randoms)
-  .map(n => dictpinyin[n % dictpinyin.length])
+  .map(n => dictPinyin[n % dictPinyin.length])
   .map(phraseToHTML)
-  .forEach(html => listpinyin.appendChild(html));
+  .forEach(html => listPinyin.appendChild(html));
   Array.from(randoms)
-  .map(n => dictwubi[n % dictwubi.length])
+  .map(n => dictWubi[n % dictWubi.length])
   .map(phraseToHTML)
-  .forEach(html => listwubi.appendChild(html)); 
+  .forEach(html => listWubi.appendChild(html)); 
+  Array.from(randoms)
+  .map(n => dictEnglish[n % dictEnglish.length])
+  .map(phraseToHTML)
+  .forEach(html => listEnglish.appendChild(html)); 
 }
 
 function phraseToHTML(phrase) {
