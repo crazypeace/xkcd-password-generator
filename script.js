@@ -42,27 +42,37 @@ function generatePassphrase() {
   const listEnglish = $('#phrasesen');
   listEnglish.innerHTML = '';
   
-  let randoms = new Uint16Array(NUM_PHRASE);
+  let randoms_py = new Uint16Array(NUM_PHRASE);
+  let randoms_wb = new Uint16Array(NUM_PHRASE);
+  let randoms_en = new Uint16Array(NUM_PHRASE);
+  let randoms = new Uint16Array(NUM_PHRASE * 3);  
   
   if (document.getElementById("randomarray").value == "")
   {
-    window.crypto.getRandomValues(randoms);
+    window.crypto.getRandomValues(randoms_py);
+    window.crypto.getRandomValues(randoms_wb);    
+    window.crypto.getRandomValues(randoms_en);    
   }
   else
   {
     var randomarray = document.getElementById("randomarray").value;
-    randoms = randomarray.split(/\s+/, 4);
+    randoms = randomarray.split(/\s+/, NUM_PHRASE);
+    randoms_py = randoms.slice(0, 4)
+    randoms_wb = randoms.slice(4, 4)
+    randoms_en = randoms.slice(8, 4)
   }
   
-  Array.from(randoms)
+  Array.from(randoms_py)
   .map(n => dictPinyin[n % dictPinyin.length])
   .map(phraseToHTML)
   .forEach(html => listPinyin.appendChild(html));
-  Array.from(randoms)
+
+  Array.from(randoms_wb)
   .map(n => dictWubi[n % dictWubi.length])
   .map(phraseToHTML)
   .forEach(html => listWubi.appendChild(html)); 
-  Array.from(randoms)
+
+  Array.from(randoms_en)
   .map(n => dictEnglish[n % dictEnglish.length])
   .map(phraseToHTML)
   .forEach(html => listEnglish.appendChild(html)); 
