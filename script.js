@@ -56,7 +56,7 @@ function generatePassphrase() {
   else
   {
     var randomarray = document.getElementById("randomarray").value;
-    randoms = randomarray.split(/\s+/, NUM_PHRASE);
+    randoms = randomarray.split(/\s+/, NUM_PHRASE * 3);
     randoms_py = randoms.slice(0, 4)
     randoms_wb = randoms.slice(4, 4)
     randoms_en = randoms.slice(8, 4)
