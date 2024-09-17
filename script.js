@@ -6,8 +6,8 @@ let dictWubi = null;
 let dictEnglish = null;
 
 async function loadDict(url) {
-  // const resp = await fetch("https://crazypeace.github.io/xkcd-password-generator/" + url);
-  const resp = await fetch(url);
+  const resp = await fetch("https://crazypeace.github.io/xkcd-password-generator/" + url);
+  // const resp = await fetch(url);
   const text = await resp.text();
   return text.split('\n')
     .filter(s => s.includes('\t'))
@@ -34,6 +34,27 @@ async function loadDict(url) {
   generatePassphrase();
   $('#generator').classList.remove('loading');
   $('#generate').disabled = false;
+  
+  document.getElementById('generate').addEventListener('click', function () {
+    generatePassphrase();
+  });
+
+  document.querySelectorAll('.copyPassword').forEach(button => {
+    button.addEventListener('click', function () {
+      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
+      const textToCopy = Array.from(phrases).map(item => item.textContent).join('');
+      navigator.clipboard.writeText(textToCopy);
+    });
+  });
+
+  document.querySelectorAll('.copyMnemonic').forEach(button => {
+    button.addEventListener('click', function () {
+      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
+      const textToCopy = Array.from(phrases).map(item => item.getAttribute('data-hans')).join('');
+      navigator.clipboard.writeText(textToCopy);
+    });
+  });
+
 })();
 
 function generatePassphrase() {
@@ -86,31 +107,3 @@ function phraseToHTML(phrase) {
   li.dataset.hans = phrase.hans;
   return content;
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  document.getElementById('generate').addEventListener('click', function () {
-    generatePassphrase();
-  });
-
-  document.querySelectorAll('.copyPassword').forEach(button => {
-    button.addEventListener('click', function () {
-      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
-      const textToCopy = Array.from(phrases).map(item => item.textContent).join('');
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('密码已复制: ' + textToCopy);
-      });
-    });
-  });
-
-  document.querySelectorAll('.copyMnemonic').forEach(button => {
-    button.addEventListener('click', function () {
-      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
-      const textToCopy = Array.from(phrases).map(item => item.getAttribute('data-hans')).join('');
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('助记词已复制: ' + textToCopy);
-      });
-    });
-  });
-
-});
