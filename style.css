@@ -13,8 +13,34 @@ header { border-bottom: #00796B solid 1px; padding: 1.2em; background: #00897B; 
 .phrases li { display: inline-block; margin-right: 0.5em; font-size: 1.8em; list-style-type:none;  font-family: monospace; }
 .phrases li::after { content: "\A" attr(data-hans); white-space: pre; font-family: serif; font-size: 0.8em; }
 
+.group {
+  border: 2px solid #4CAF50; /* 绿色边框 */
+  padding: 15px; /* 内边距 */
+  margin-top: 10px; /* 组之间的间距 */
+  margin-bottom: 10px; /* 组之间的间距 */
+}
+
 article { background: #E0F2F1; padding: 1em; width: 80%; margin: 0 auto;}
 article h2 { font-size: 1.5em; color: #004D40; margin-top: 1.5em; }
 article a:link { color: #00695C; }
 article a:visited { color: #004D40; }
 a.note { font-size: 0.6em; vertical-align: top; }
+		  
+html.han-la hanla:after {
+	content: " ";
+	display: inline;
+	font-family: Arial;
+	font-size: 0.89em;
+}
+
+html.han-la code hanla,
+html.han-la pre hanla,
+html.han-la kbd hanla,
+html.han-la samp hanla {
+	display: none;
+}
+
+html.han-la ol > hanla,
+html.han-la ul > hanla {
+	display: none;
+}

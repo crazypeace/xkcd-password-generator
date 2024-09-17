@@ -6,6 +6,7 @@ let dictWubi = null;
 let dictEnglish = null;
 
 async function loadDict(url) {
+  // const resp = await fetch("https://crazypeace.github.io/xkcd-password-generator/" + url);
   const resp = await fetch(url);
   const text = await resp.text();
   return text.split('\n')
@@ -20,8 +21,8 @@ async function loadDict(url) {
 (async function () {
   try {
     dictPinyin = await loadDict("pinyin8k.wordlist");
-	dictWubi = await loadDict("wubi8k.wordlist");
-	dictEnglish = await loadDict("english4k.wordlist");
+    dictWubi = await loadDict("wubi8k.wordlist");
+    dictEnglish = await loadDict("english4k.wordlist");
   } catch (e) {
     alert("Fail to load dict: " + e);
     return;
@@ -29,6 +30,7 @@ async function loadDict(url) {
   console.log(`dictPinyin${dictPinyin.length} phrases loaded`);
   console.log(`dictWubi${dictWubi.length} phrases loaded`);
   console.log(`dictEnglish${dictEnglish.length} phrases loaded`);
+  
   generatePassphrase();
   $('#generator').classList.remove('loading');
   $('#generate').disabled = false;
@@ -41,41 +43,39 @@ function generatePassphrase() {
   listWubi.innerHTML = '';
   const listEnglish = $('#phrasesen');
   listEnglish.innerHTML = '';
-  
+
   let randoms_py = new Uint16Array(NUM_PHRASE);
   let randoms_wb = new Uint16Array(NUM_PHRASE);
   let randoms_en = new Uint16Array(NUM_PHRASE);
-  let randoms = new Uint16Array(NUM_PHRASE * 3);  
-  
-  if (document.getElementById("randomarray").value == "")
-  {
+  let randoms = new Uint16Array(NUM_PHRASE * 3);
+
+  if (document.getElementById("randomarray").value == "") {
     window.crypto.getRandomValues(randoms_py);
-    window.crypto.getRandomValues(randoms_wb);    
-    window.crypto.getRandomValues(randoms_en);    
+    window.crypto.getRandomValues(randoms_wb);
+    window.crypto.getRandomValues(randoms_en);
   }
-  else
-  {
+  else {
     var randomarray = document.getElementById("randomarray").value;
     randoms = randomarray.split(/\s+/, NUM_PHRASE * 3);
     randoms_py = randoms.slice(0, 4)
     randoms_wb = randoms.slice(4, 8)
     randoms_en = randoms.slice(8, 12)
   }
-  
+
   Array.from(randoms_py)
-  .map(n => dictPinyin[n % dictPinyin.length])
-  .map(phraseToHTML)
-  .forEach(html => listPinyin.appendChild(html));
+    .map(n => dictPinyin[n % dictPinyin.length])
+    .map(phraseToHTML)
+    .forEach(html => listPinyin.appendChild(html));
 
   Array.from(randoms_wb)
-  .map(n => dictWubi[n % dictWubi.length])
-  .map(phraseToHTML)
-  .forEach(html => listWubi.appendChild(html)); 
+    .map(n => dictWubi[n % dictWubi.length])
+    .map(phraseToHTML)
+    .forEach(html => listWubi.appendChild(html));
 
   Array.from(randoms_en)
-  .map(n => dictEnglish[n % dictEnglish.length])
-  .map(phraseToHTML)
-  .forEach(html => listEnglish.appendChild(html)); 
+    .map(n => dictEnglish[n % dictEnglish.length])
+    .map(phraseToHTML)
+    .forEach(html => listEnglish.appendChild(html));
 }
 
 function phraseToHTML(phrase) {
@@ -87,7 +87,30 @@ function phraseToHTML(phrase) {
   return content;
 }
 
-$('#generator').addEventListener("submit", ev => {
-  ev.preventDefault();
-  generatePassphrase();
+document.addEventListener('DOMContentLoaded', function () {
+
+  document.getElementById('generate').addEventListener('click', function () {
+    generatePassphrase();
+  });
+
+  document.querySelectorAll('.copyPassword').forEach(button => {
+    button.addEventListener('click', function () {
+      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
+      const textToCopy = Array.from(phrases).map(item => item.textContent).join('');
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert('密码已复制: ' + textToCopy);
+      });
+    });
+  });
+
+  document.querySelectorAll('.copyMnemonic').forEach(button => {
+    button.addEventListener('click', function () {
+      const phrases = this.parentElement.querySelectorAll('ul.phrases li');
+      const textToCopy = Array.from(phrases).map(item => item.getAttribute('data-hans')).join('');
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert('助记词已复制: ' + textToCopy);
+      });
+    });
+  });
+
 });
