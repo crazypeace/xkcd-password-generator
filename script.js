@@ -6,8 +6,8 @@ let dictWubi = null;
 let dictEnglish = null;
 
 async function loadDict(url) {
-  const resp = await fetch("https://crazypeace.github.io/xkcd-password-generator/" + url);
-  // const resp = await fetch(url);
+  // const resp = await fetch("https://crazypeace.github.io/xkcd-password-generator/" + url);
+  const resp = await fetch(url);
   const text = await resp.text();
   return text.split('\n')
     .filter(s => s.includes('\t'))
