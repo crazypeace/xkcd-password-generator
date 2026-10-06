@@ -105,12 +105,17 @@ function buildSections(phrases) {
 function renderGroup(ul, phrases) {
   ul.innerHTML = '';
   const { sep } = getOptions();
-  const dash = sep === 'dash' ? '-' : '';
-  // 分隔符用 li::before 伪元素显示（见 style.css），保证出现在密码那一排，
-  // 而不是被 li::after 的换行挤到助记词那一排
-  ul.classList.toggle('dashed', dash !== '');
+  const dash = sep === 'dash';
   const sections = buildSections(phrases);
-  sections.forEach((s) => {
+  sections.forEach((s, i) => {
+    // 分隔符做成独立的 li（而非 li::before 或文本节点）：
+    // 词与助记词都顶着各自 li 的左沿，两排自然对齐；复制助记词时按 data-hans 过滤，sep li 自动跳过
+    if (i > 0 && dash) {
+      const sepLi = document.createElement('li');
+      sepLi.className = 'sep';
+      sepLi.textContent = '-';
+      ul.appendChild(sepLi);
+    }
     const li = document.createElement('li');
     li.textContent = s.text;
     if (s.hans) {
@@ -121,7 +126,7 @@ function renderGroup(ul, phrases) {
     ul.appendChild(li);
   });
   // 复制密码时用的最终字符串（含分隔符与数字节）
-  ul.dataset.password = sections.map(s => s.text).join(dash);
+  ul.dataset.password = sections.map(s => s.text).join(dash ? '-' : '');
 }
 
 function renderAll() {
