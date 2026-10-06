@@ -8,9 +8,18 @@ header { border-bottom: #00796B solid 1px; padding: 1.2em; background: #00897B; 
 
 #intro { padding: 1em; padding: 1em; width: 85%; margin: 0 auto; } 
 #generator { text-align: center; padding: 1em; } 
+#options { text-align: center; padding: 0.5em 1em; }
+#options fieldset { display: inline-block; vertical-align: top; margin: 0.3em; text-align: left; }
+#options label { display: block; margin: 0.25em 0; cursor: pointer; }
+#options legend { font-weight: bold; }
+#entropy { color: #555; font-size: 0.95em; margin: 0.5em 0 0; }
+.phrases li.digits { color: #b71c1c; }
+/* 分隔符显示在密码那一排：每个 li（除第一个）开头用 ::before 放一个 "-"，
+   避免被 li::after 的换行挤到助记词那一排 */
+.phrases.dashed li + li::before { content: "-\00a0"; }
 #generator.loading li { color: lightgray; }
 .phrases { list-style: none; }
-.phrases li { display: inline-block; margin-right: 0.5em; font-size: 1.8em; list-style-type:none;  font-family: monospace; }
+.phrases li { display: inline-block; margin-right: 0.5em; font-size: 1.8em; list-style-type:none;  font-family: monospace; vertical-align: top; }
 .phrases li::after { content: "\A" attr(data-hans); white-space: pre; font-family: serif; font-size: 0.8em; }
 
 .group {
